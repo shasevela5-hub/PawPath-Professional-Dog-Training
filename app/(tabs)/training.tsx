@@ -9,7 +9,7 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { useColors } from '@/hooks/use-colors';
 
 import { getDogProfile, getPremiumStatus } from '@/lib/storage';
-import { trainingPaths, getPathsByLifeStage } from '@/data/training-paths';
+import { trainingPaths, getTrainingPathsByLifeStage } from '@/data/training-paths';
 import type { DogProfile, PremiumStatus, LifeStage, TrainingPath } from '@/types';
 
 export default function TrainingScreen() {
@@ -26,7 +26,7 @@ export default function TrainingScreen() {
 
   useEffect(() => {
     // Filter paths by selected life stage
-    const paths = getPathsByLifeStage(selectedLifeStage);
+    const paths = getTrainingPathsByLifeStage(selectedLifeStage);
     setFilteredPaths(paths);
   }, [selectedLifeStage]);
 

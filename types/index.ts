@@ -50,7 +50,7 @@ export interface Exercise {
   description: string;
   difficulty: DifficultyLevel;
   estimatedMinutes: number;
-  week: number; // which week in the training path
+  week?: number; // which week in the training path
   day?: number; // optional day within the week
   steps: ExerciseStep[];
   tips: string[];
