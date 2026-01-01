@@ -69,35 +69,52 @@ export async function addCompletedExercise(
       throw new Error('No user progress found');
     }
 
-    progress.completedExercises.push(completion);
+    // Check if exercise already completed today
+    const today = new Date().toISOString().split('T')[0];
+    const alreadyCompletedToday = progress.completedExercises.some(
+      c => c.exerciseId === completion.exerciseId && 
+           c.completedAt.split('T')[0] === today
+    );
+
+    if (!alreadyCompletedToday) {
+      progress.completedExercises.push(completion);
+    }
+
+    // Update last activity date
+    const previousLastActivity = progress.lastActivityDate?.split('T')[0];
     progress.lastActivityDate = completion.completedAt;
 
     // Update streak
-    const today = new Date().toISOString().split('T')[0];
-    const lastActivity = progress.lastActivityDate?.split('T')[0];
-    
-    if (lastActivity === today) {
-      // Same day, streak continues
-    } else if (lastActivity) {
-      const lastDate = new Date(lastActivity);
-      const todayDate = new Date(today);
+    if (!previousLastActivity) {
+      // First activity ever
+      progress.currentStreak = 1;
+      progress.longestStreak = 1;
+    } else if (previousLastActivity === today) {
+      // Same day, streak continues (no change)
+    } else {
+      // Different day
+      const lastDate = new Date(previousLastActivity + 'T00:00:00Z');
+      const todayDate = new Date(today + 'T00:00:00Z');
       const diffDays = Math.floor(
         (todayDate.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24)
       );
-      
+
       if (diffDays === 1) {
-        // Consecutive day
+        // Consecutive day - increment streak
         progress.currentStreak += 1;
         progress.longestStreak = Math.max(
           progress.longestStreak,
           progress.currentStreak
         );
       } else if (diffDays > 1) {
-        // Streak broken
+        // Streak broken - reset to 1
         progress.currentStreak = 1;
       }
-    } else {
-      progress.currentStreak = 1;
+    }
+
+    // Update total training minutes
+    if (completion.estimatedMinutes) {
+      progress.totalTrainingMinutes += completion.estimatedMinutes;
     }
 
     await saveUserProgress(progress);

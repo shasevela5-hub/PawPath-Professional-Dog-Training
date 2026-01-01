@@ -113,3 +113,11 @@
 - [x] Document how to add new training exercises
 - [x] Create user guide for app features
 - [x] Document premium feature configuration
+
+
+## Bug Fixes
+- [x] Fixed exercise completion error when marking exercises as complete
+- [x] Fixed data persistence on app initialization
+- [x] Fixed streak calculation logic with proper date handling
+- [x] Added haptic feedback for successful exercise completion
+- [x] Added estimatedMinutes tracking for total training time

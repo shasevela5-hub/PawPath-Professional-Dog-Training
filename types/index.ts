@@ -71,6 +71,7 @@ export interface ExerciseCompletion {
   completedAt: string;
   notes?: string;
   rating?: number; // 1-5 stars, optional user rating
+  estimatedMinutes?: number; // for tracking total training time
 }
 
 export interface UserProgress {

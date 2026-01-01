@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity, RefreshControl, Platform } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 
@@ -10,9 +10,10 @@ import { ProgressBar } from '@/components/ui/progress-bar';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { useColors } from '@/hooks/use-colors';
 
-import { getDogProfile, getUserProgress, isOnboardingComplete } from '@/lib/storage';
+import { getDogProfile, getUserProgress, isOnboardingComplete, saveDogProfile, saveUserProgress, setOnboardingComplete } from '@/lib/storage';
 import { getTrainingPathById } from '@/data/training-paths';
 import type { DogProfile, UserProgress, Exercise } from '@/types';
+
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -21,6 +22,13 @@ export default function HomeScreen() {
   const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
   const [todayExercises, setTodayExercises] = useState<Exercise[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  async function onRefresh() {
+    setRefreshing(true);
+    await loadData();
+    setRefreshing(false);
+  }
 
   useEffect(() => {
     loadData();
@@ -52,6 +60,11 @@ export default function HomeScreen() {
           badges: [],
         };
 
+        // Save to storage
+        await saveDogProfile(defaultProfile);
+        await saveUserProgress(defaultProgress);
+        await setOnboardingComplete();
+        
         setDogProfile(defaultProfile);
         setUserProgress(defaultProgress);
         
@@ -123,6 +136,11 @@ export default function HomeScreen() {
       <ScrollView 
         contentContainerStyle={{ flexGrow: 1, paddingBottom: 20 }}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          Platform.OS === 'web' ? undefined : (
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          )
+        }
       >
         <View className="flex-1 gap-6">
           {/* Header */}

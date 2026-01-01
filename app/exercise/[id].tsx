@@ -1,6 +1,7 @@
-import { ScrollView, Text, View, TextInput, Alert } from 'react-native';
+import { ScrollView, Text, View, TextInput, Alert, Platform } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import * as Haptics from 'expo-haptics';
 
 import { ScreenContainer } from '@/components/screen-container';
 import { Card } from '@/components/ui/card';
@@ -10,7 +11,7 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { useColors } from '@/hooks/use-colors';
 
 import { getTrainingPathById } from '@/data/training-paths';
-import { getUserProgress, addCompletedExercise } from '@/lib/storage';
+import { getUserProgress, addCompletedExercise, saveUserProgress } from '@/lib/storage';
 import type { Exercise, ExerciseCompletion } from '@/types';
 
 export default function ExerciseDetailScreen() {
@@ -64,14 +65,19 @@ export default function ExerciseDetailScreen() {
         pathId: exercise.pathId,
         completedAt: new Date().toISOString(),
         notes: notes.trim() || undefined,
+        estimatedMinutes: exercise.estimatedMinutes,
       };
       
       await addCompletedExercise(completion);
       setIsCompleted(true);
       
+      if (Platform.OS !== 'web') {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      }
+      
       Alert.alert(
         'Great Job! 🎉',
-        'Exercise completed successfully!',
+        `Exercise completed! You've trained for ${exercise.estimatedMinutes} minutes.`,
         [
           {
             text: 'Continue Training',
@@ -81,6 +87,7 @@ export default function ExerciseDetailScreen() {
       );
     } catch (error) {
       console.error('Error marking complete:', error);
+      console.error('Full error:', JSON.stringify(error));
       Alert.alert('Error', 'Failed to save completion. Please try again.');
     }
   }
