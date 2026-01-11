@@ -19,6 +19,7 @@ const basicObedienceExercises: Exercise[] = [
     difficulty: 'beginner',
     estimatedMinutes: 10,
     week: 1,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/BigBuckBunny.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Hold a treat close to your dog\'s nose.' },
       { stepNumber: 2, instruction: 'Move your hand up, allowing their head to follow the treat and causing their bottom to lower.' },
@@ -36,6 +37,7 @@ const basicObedienceExercises: Exercise[] = [
     difficulty: 'beginner',
     estimatedMinutes: 15,
     week: 1,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/ElephantsDream.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Ask your dog to sit.' },
       { stepNumber: 2, instruction: 'Open the palm of your hand in front of you, and say "Stay."' },
@@ -53,6 +55,7 @@ const basicObedienceExercises: Exercise[] = [
     difficulty: 'beginner',
     estimatedMinutes: 15,
     week: 2,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/ForBiggerBlazes.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Put a leash and collar on your dog.' },
       { stepNumber: 2, instruction: 'Go down to their level and say "Come" while gently pulling on the leash.' },
@@ -70,6 +73,7 @@ const basicObedienceExercises: Exercise[] = [
     difficulty: 'beginner',
     estimatedMinutes: 12,
     week: 2,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/ForBiggerEscapes.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Start with your dog in a sitting position.' },
       { stepNumber: 2, instruction: 'Hold a treat close to the ground in front of their paws.' },
@@ -87,6 +91,7 @@ const basicObedienceExercises: Exercise[] = [
     difficulty: 'intermediate',
     estimatedMinutes: 15,
     week: 3,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/ForBiggerFun.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Place a low-value treat on the ground.' },
       { stepNumber: 2, instruction: 'Cover it with your hand and say "Leave it."' },

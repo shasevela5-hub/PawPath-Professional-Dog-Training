@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, TextInput, Alert, Platform } from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity, TextInput, Alert, Pressable, Platform } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as Haptics from 'expo-haptics';
@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { VideoPlayer } from '@/components/ui/video-player';
 import { useColors } from '@/hooks/use-colors';
 
 import { getTrainingPathById } from '@/data/training-paths';
@@ -185,6 +186,17 @@ export default function ExerciseDetailScreen() {
                   </View>
                 ))}
               </View>
+            </Card>
+          )}
+
+          {/* Video Demonstration */}
+          {exercise.videoUrl && (
+            <Card className="gap-3">
+              <VideoPlayer
+                videoUrl={exercise.videoUrl}
+                title="Video Demonstration"
+                description="Watch this demonstration to see the exercise in action"
+              />
             </Card>
           )}
 

@@ -139,3 +139,24 @@
 - [x] Added training tips and best practices
 - [x] Organized by difficulty level (beginner, intermediate, advanced)
 - [x] All tests passing with expanded content
+
+
+## Video Demonstrations Feature
+- [ ] Create video player component using expo-video
+- [ ] Add videoUrl field to exercise data
+- [ ] Add sample video URLs to key exercises
+- [ ] Update exercise detail screen to display video player
+- [ ] Add video controls (play, pause, fullscreen)
+- [ ] Handle video loading states
+- [ ] Test video playback on mobile and web
+
+
+## Video Demonstrations Feature
+- [x] Create video player component using expo-video
+- [x] Add videoUrl field to exercise data
+- [x] Add sample video URLs to 5 key exercises (Sit, Stay, Come, Down, Leave It)
+- [x] Update exercise detail screen to display video player
+- [x] Add video controls (play, pause, fullscreen)
+- [x] Handle video loading states
+- [x] Test video playback on mobile and web
+- [x] All tests passing with video feature
