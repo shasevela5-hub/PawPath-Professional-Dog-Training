@@ -13,6 +13,7 @@ type IconSymbolName = keyof typeof MAPPING;
  * - see Material Icons in the [Icons Directory](https://icons.expo.fyi).
  * - see SF Symbols in the [SF Symbols](https://developer.apple.com/sf-symbols/) app.
  */
+// @ts-expect-error - Material Icons has a different type signature
 const MAPPING = {
   // Navigation & general
   "house.fill": "home",
@@ -42,6 +43,8 @@ const MAPPING = {
   "sun.max.fill": "wb-sunny",
   "moon.fill": "nightlight-round",
   "circle.lefthalf.filled": "brightness-medium",
+  "command.circle.fill": "school",
+  "magic.wand.and.stars": "auto-awesome",
 
   // Profile / exercise screen icons
   "xmark.circle.fill": "cancel",

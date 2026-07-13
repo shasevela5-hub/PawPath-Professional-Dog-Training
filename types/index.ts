@@ -13,7 +13,9 @@ export type TrainingCategory =
   | 'agility'
   | 'protection'
   | 'therapy-dog'
-  | 'search-rescue';
+  | 'search-rescue'
+  | 'advanced-obedience'
+  | 'trick-training';
 
 export type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced';
 
