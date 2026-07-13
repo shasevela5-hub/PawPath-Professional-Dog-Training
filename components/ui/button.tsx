@@ -1,6 +1,8 @@
 import { Text, Pressable, type PressableProps, Platform } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { cn } from '@/lib/utils';
+import { useContext } from 'react';
+import { SettingsContext } from '@/lib/settings-context';
 
 export interface ButtonProps extends PressableProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -20,8 +22,12 @@ export function Button({
   disabled,
   ...props
 }: ButtonProps) {
+  // Read haptic preference — gracefully fall back to enabled if context is absent
+  const settingsCtx = useContext(SettingsContext);
+  const hapticEnabled = settingsCtx?.settings?.hapticFeedbackEnabled ?? true;
+
   const handlePress = (event: any) => {
-    if (Platform.OS !== 'web') {
+    if (Platform.OS !== 'web' && hapticEnabled) {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     }
     onPress?.(event);

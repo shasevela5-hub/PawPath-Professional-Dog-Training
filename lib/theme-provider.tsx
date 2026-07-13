@@ -3,17 +3,28 @@ import { Appearance, View, useColorScheme as useSystemColorScheme } from "react-
 import { colorScheme as nativewindColorScheme, vars } from "nativewind";
 
 import { SchemeColors, type ColorScheme } from "@/constants/theme";
+import { getAppSettings, saveAppSettings } from "@/lib/storage";
+
+/** The persisted preference — 'auto' means follow the system. */
+export type ThemePreference = "light" | "dark" | "auto";
 
 type ThemeContextValue = {
   colorScheme: ColorScheme;
+  themePreference: ThemePreference;
+  setThemePreference: (pref: ThemePreference) => void;
+  /** @deprecated use setThemePreference instead */
   setColorScheme: (scheme: ColorScheme) => void;
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const systemScheme = useSystemColorScheme() ?? "light";
-  const [colorScheme, setColorSchemeState] = useState<ColorScheme>(systemScheme);
+  const systemScheme = (useSystemColorScheme() ?? "light") as ColorScheme;
+  const [preference, setPreferenceState] = useState<ThemePreference>("auto");
+
+  // Derive the effective colour scheme from the stored preference
+  const colorScheme: ColorScheme =
+    preference === "auto" ? systemScheme : preference;
 
   const applyScheme = useCallback((scheme: ColorScheme) => {
     nativewindColorScheme.set(scheme);
@@ -29,14 +40,42 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const setColorScheme = useCallback((scheme: ColorScheme) => {
-    setColorSchemeState(scheme);
-    applyScheme(scheme);
-  }, [applyScheme]);
+  // Load saved preference from AsyncStorage on mount
+  useEffect(() => {
+    getAppSettings()
+      .then((saved) => {
+        if (saved?.theme) {
+          setPreferenceState(saved.theme as ThemePreference);
+        }
+      })
+      .catch(() => {
+        // ignore — fall back to 'auto'
+      });
+  }, []);
 
+  // Apply the effective scheme whenever it changes
   useEffect(() => {
     applyScheme(colorScheme);
   }, [applyScheme, colorScheme]);
+
+  const setThemePreference = useCallback(
+    (pref: ThemePreference) => {
+      setPreferenceState(pref);
+      // Persist immediately
+      getAppSettings()
+        .then((current) => saveAppSettings({ ...current, theme: pref }))
+        .catch(() => {});
+    },
+    [],
+  );
+
+  // Back-compat shim: setColorScheme('light'|'dark') maps to setThemePreference
+  const setColorScheme = useCallback(
+    (scheme: ColorScheme) => {
+      setThemePreference(scheme);
+    },
+    [setThemePreference],
+  );
 
   const themeVariables = useMemo(
     () =>
@@ -57,11 +96,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo(
     () => ({
       colorScheme,
+      themePreference: preference,
+      setThemePreference,
       setColorScheme,
     }),
-    [colorScheme, setColorScheme],
+    [colorScheme, preference, setThemePreference, setColorScheme],
   );
-  console.log(value, themeVariables)
 
   return (
     <ThemeContext.Provider value={value}>

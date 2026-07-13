@@ -14,10 +14,13 @@ type IconSymbolName = keyof typeof MAPPING;
  * - see SF Symbols in the [SF Symbols](https://developer.apple.com/sf-symbols/) app.
  */
 const MAPPING = {
+  // Navigation & general
   "house.fill": "home",
   "paperplane.fill": "send",
   "chevron.left.forwardslash.chevron.right": "code",
   "chevron.right": "chevron-right",
+  "chevron.up": "keyboard-arrow-up",
+  "chevron.down": "keyboard-arrow-down",
   "book.fill": "menu-book",
   "chart.bar.fill": "bar-chart",
   "pawprint.fill": "pets",
@@ -26,6 +29,31 @@ const MAPPING = {
   "checkmark.circle.fill": "check-circle",
   "plus.circle.fill": "add-circle",
   "gear": "settings",
+
+  // Settings screen icons
+  "gearshape.fill": "settings",
+  "paintbrush.fill": "palette",
+  "bell.fill": "notifications",
+  "hand.tap.fill": "touch-app",
+  "trash.fill": "delete",
+  "info.circle.fill": "info",
+  "doc.text.fill": "description",
+  "heart.fill": "favorite",
+  "sun.max.fill": "wb-sunny",
+  "moon.fill": "nightlight-round",
+  "circle.lefthalf.filled": "brightness-medium",
+
+  // Profile / exercise screen icons
+  "xmark.circle.fill": "cancel",
+  "play.circle.fill": "play-circle",
+  "pause.circle.fill": "pause-circle",
+  "arrow.clockwise": "refresh",
+  "trophy.fill": "emoji-events",
+  "flame.fill": "local-fire-department",
+  "clock.fill": "schedule",
+  "calendar": "calendar-today",
+  "checkmark": "check",
+  "exclamationmark.triangle.fill": "warning",
 } as IconMapping;
 
 /**

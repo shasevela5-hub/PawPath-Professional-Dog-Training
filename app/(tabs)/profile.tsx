@@ -318,25 +318,15 @@ export default function ProfileScreen() {
             )}
           </Card>
 
-          {/* Settings */}
+          {/* Settings shortcut */}
           <View className="gap-3">
             <Text className="text-xl font-bold text-foreground">Settings</Text>
             
-            <TouchableOpacity activeOpacity={0.7}>
+            <TouchableOpacity activeOpacity={0.7} onPress={() => router.push('/(tabs)/settings')}>
               <Card className="flex-row items-center justify-between">
                 <View className="flex-row items-center gap-3">
-                  <IconSymbol name="gear" size={24} color={colors.muted} />
+                  <IconSymbol name="gearshape.fill" size={24} color={colors.muted} />
                   <Text className="text-base text-foreground">App Settings</Text>
-                </View>
-                <IconSymbol name="chevron.right" size={20} color={colors.muted} />
-              </Card>
-            </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={0.7} onPress={handleResetData}>
-              <Card className="flex-row items-center justify-between">
-                <View className="flex-row items-center gap-3">
-                  <IconSymbol name="gear" size={24} color={colors.error} />
-                  <Text className="text-base text-error">Reset All Data</Text>
                 </View>
                 <IconSymbol name="chevron.right" size={20} color={colors.muted} />
               </Card>

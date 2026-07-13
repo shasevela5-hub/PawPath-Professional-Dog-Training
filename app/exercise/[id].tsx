@@ -1,7 +1,8 @@
 import { ScrollView, Text, View, TouchableOpacity, TextInput, Alert, Pressable, Platform } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as Haptics from 'expo-haptics';
+import { SettingsContext } from '@/lib/settings-context';
 
 import { ScreenContainer } from '@/components/screen-container';
 import { Card } from '@/components/ui/card';
@@ -57,6 +58,9 @@ export default function ExerciseDetailScreen() {
     }
   }
 
+  const settingsCtx = useContext(SettingsContext);
+  const hapticEnabled = settingsCtx?.settings?.hapticFeedbackEnabled ?? true;
+
   async function handleMarkComplete() {
     if (!exercise) return;
     
@@ -72,7 +76,7 @@ export default function ExerciseDetailScreen() {
       await addCompletedExercise(completion);
       setIsCompleted(true);
       
-      if (Platform.OS !== 'web') {
+      if (Platform.OS !== 'web' && hapticEnabled) {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       }
       
