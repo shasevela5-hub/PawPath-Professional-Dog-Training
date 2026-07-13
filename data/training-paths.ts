@@ -232,6 +232,7 @@ const houseTrainingExercises: Exercise[] = [
     difficulty: 'beginner',
     estimatedMinutes: 15,
     week: 1,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/BigBuckBunny.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Leave the crate door open with treats inside.' },
       { stepNumber: 2, instruction: 'Let your dog explore at their own pace.' },
@@ -266,6 +267,7 @@ const houseTrainingExercises: Exercise[] = [
     difficulty: 'beginner',
     estimatedMinutes: 10,
     week: 1,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/ElephantsDream.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Take your dog to the designated potty area.' },
       { stepNumber: 2, instruction: 'Use a cue word like "Go potty."' },
@@ -334,6 +336,7 @@ const houseTrainingExercises: Exercise[] = [
     difficulty: 'intermediate',
     estimatedMinutes: 10,
     week: 6,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/ForBiggerBlazes.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Only give freedom when you can supervise.' },
       { stepNumber: 2, instruction: 'Start with one room, then gradually expand.' },
@@ -372,6 +375,7 @@ const socializationExercises: Exercise[] = [
     difficulty: 'beginner',
     estimatedMinutes: 15,
     week: 1,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/ForBiggerEscapes.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Start with calm, dog-friendly people.' },
       { stepNumber: 2, instruction: 'Have the person offer treats to your dog.' },
@@ -389,6 +393,7 @@ const socializationExercises: Exercise[] = [
     difficulty: 'intermediate',
     estimatedMinutes: 20,
     week: 2,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/ForBiggerFun.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Visit the dog park during quiet hours.' },
       { stepNumber: 2, instruction: 'Let your dog observe other dogs from a distance.' },
@@ -1110,6 +1115,7 @@ const therapyDogExercises: Exercise[] = [
     difficulty: 'intermediate',
     estimatedMinutes: 20,
     week: 1,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/BigBuckBunny.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Practice in increasingly busy environments.' },
       { stepNumber: 2, instruction: 'Reward calm behavior.' },
@@ -1144,6 +1150,7 @@ const therapyDogExercises: Exercise[] = [
     difficulty: 'intermediate',
     estimatedMinutes: 20,
     week: 2,
+    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/ElephantsDream.mp4',
     steps: [
       { stepNumber: 1, instruction: 'Teach your dog to lean against people.' },
       { stepNumber: 2, instruction: 'Teach them to rest their head on laps.' },
